@@ -33,3 +33,10 @@ You can now boot the app with:
 ```
 docker-compose up
 ```
+Finally, you need to create the database. In another terminal, run:
+
+```
+docker-compose run web rake db:create
+```
+
+That’s it. Your app should now be running on port 3000 on your Docker daemon
