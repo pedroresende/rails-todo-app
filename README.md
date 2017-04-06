@@ -2,8 +2,8 @@
 
 ## Requirements
 
-docker (https://www.docker.com/community-edition#/download)
-docker-compose (https://docs.docker.com/compose/install/)
+- docker (https://www.docker.com/community-edition#/download)
+- docker-compose (https://docs.docker.com/compose/install/)
 
 ## Build the project
 
