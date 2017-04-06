@@ -1,6 +1,11 @@
-# docker-rails-boilerplate
+# Docker-rails-boilerplate
 
-Build the project
+## Requirements
+
+docker (https://www.docker.com/community-edition#/download)
+docker-compose (https://docs.docker.com/compose/install/)
+
+## Build the project
 
 ```
 $ docker-compose run web rails new . --force --database=postgresql --skip-bundle
