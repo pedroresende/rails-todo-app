@@ -8,7 +8,7 @@
 ## Build the project
 
 ```
-$ docker-compose run web rails new . --force --database=postgresql --skip-bundle
+$ docker-compose run web rails new . --force --database=mysql --skip-bundle
 
 $ docker-compose build
 ```
@@ -18,18 +18,17 @@ $ docker-compose build
 Replace the contents of config/database.yml with the following:
 
 ```
-development: &default
-  adapter: postgresql
-  encoding: unicode
-  database: myapp_development
-  pool: 5
-  username: postgres
-  password:
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password: rails
   host: db
 
 test:
   <<: *default
-  database: myapp_test
+  database: rails_test
 
 ```
 
