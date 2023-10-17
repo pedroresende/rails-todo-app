@@ -8,7 +8,7 @@
 ## Build the project
 
 ```
-$ docker-compose run web rails new . --force --database=mysql --skip-bundle
+$ docker-compose run web rails new . --force --database=postgresql --skip-bundle
 
 $ docker-compose build
 ```
@@ -19,16 +19,18 @@ Replace the contents of config/database.yml with the following:
 
 ```
 default: &default
-  adapter: mysql2
-  encoding: utf8
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
+  username: rails
   password: rails
   host: db
 
 test:
   <<: *default
-  database: rails_test
+  database: rails
 
 ```
 
@@ -37,6 +39,7 @@ You can now boot the app with:
 ```
 docker-compose up
 ```
+
 Finally, you need to create the database. In another terminal, run:
 
 ```
