@@ -28,7 +28,7 @@ default: &default
   password: rails
   host: db
 
-test:
+development:
   <<: *default
   database: rails
 
