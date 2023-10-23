@@ -8,26 +8,27 @@ class ApplicationController < ActionController::Base
   end
 
   def check
-    todo = Todo.find_by(id: params[:id])
-    if todo.update(done: true)
+    @todo = Todo.find_by(id: params[:id])
+    if @todo.update(done: true)
       head :ok, status: 200
     end
   end
 
   def uncheck
-    todo = Todo.find_by(id: params[:id])
-    if todo.update(done: false)
+    @todo = Todo.find_by(id: params[:id])
+    if @todo.update(done: false)
       head(:ok)
     end
   end
 
   def new
+    @todo = Todo.new
   end
 
   def create
-    todo = Todo.new(title: params['title'], done: params['done'], due_date: params['due_date'])
+    @todo = Todo.new(todo_params)
 
-    if todo.save
+    if @todo.save
       redirect_to root_path
     else
       render :new, status: :unprocessable_entity
@@ -41,4 +42,10 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, status: :see_other
 
   end
+
+  private
+  def todo_params
+    params.permit(:title, :done, :due_date)
+  end
+
 end
