@@ -1,0 +1,35 @@
+<h1 class="text-3xl block mb-4">Welcome to the Ruby on Rails todo app</h1>
+
+<%= link_to('Add new', { action: 'new', controller: "application"}, class: 'py-2 px-4 bg-blue-500 text-white') %>
+
+<%= link_to('Hide done', { action: 'hide', controller: "application"}, class: 'py-2 px-4 bg-blue-500 text-white') %>
+
+<ul class="mt-4">
+  <% @todos.each do |todo| %>
+    <li class="my-2 flex place-items-center">
+      <div class="mr-4 w-80">
+        <%= check_box_tag(todo.id, todo.id, todo.done, :onclick => "changeState(event)") %>
+        <%= todo.title %>
+      </div>
+      <%= button_to "Delete", {controller: "application", action: "delete", id: todo.id}, method: :delete, form: { data: { turbo_confirm: "Are you sure"}}, class: 'py-2 px-4 bg-red-500 text-white inline' %>
+    </li>
+  <% end %>
+</ul>
+
+<script>
+  const changeState = (event) => {
+    const { value, checked } = event.target
+
+    const path = checked ? `/check/${value}.json` : `/uncheck/${value}.json`
+
+    fetch(path,
+      { 
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content,
+        },
+      }
+    )
+  }
+</script>

@@ -1,0 +1,24 @@
+<h1 class="text-3xl block">Create new Todo</h1>
+
+<%= form_with model: @TODO do |form| %>
+  <div class="mt-2">
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="mt-2">
+    <%= form.label :done %><br>
+    <%= form.check_box :done %>
+  </div>
+
+  <div class="mt-2">
+    <%= form.label :due_date %><br>
+    <%= form.datetime_field :due_date %>
+  </div>
+
+  <div class="mt-2 flex">
+    <%= link_to('Back', { action: 'index', controller: "application"}, class: 'py-2 px-4 bg-blue-500 text-white mr-4') %>
+
+    <%= form.submit "Create", class: 'py-2 px-4 bg-blue-500 text-white' %>
+  </div>
+<% end %>

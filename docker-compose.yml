@@ -10,7 +10,7 @@ services:
       - "${DB_PORT}:5432"
   web:
     build: .
-    command: bash -c "bundle install && bin/rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "bundle install && bundle exec puma"
     volumes:
       - .:/myapp
       - bundle_cache:/usr/local/bundle
