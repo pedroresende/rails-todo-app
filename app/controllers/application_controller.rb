@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  before_action :authenticate_user!
+
   def index
     @todos = Todo.order("id ASC").all
   end
@@ -9,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   def check
     @todo = Todo.find_by(id: params[:id])
-    if @todo.update(done: true)
+    if @todo.update(done: true, due_date: DateTime.current)
       head :ok, status: 200
     end
   end
@@ -26,7 +28,9 @@ class ApplicationController < ActionController::Base
   end
 
   def create
-    @todo = Todo.new(todo_params)
+    puts YAML::dump(current_user[:id])
+    @user = User.find_by(id: current_user[:id])
+    @todo = user.todos.create(todo_params)
 
     if @todo.save
       redirect_to root_path

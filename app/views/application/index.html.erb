@@ -1,8 +1,12 @@
 <h1 class="text-3xl block mb-4">Welcome to the Ruby on Rails todo app</h1>
 
-<%= link_to('Add new', { action: 'new', controller: "application"}, class: 'py-2 px-4 bg-blue-500 text-white') %>
+<nav class="flex">
+<%= link_to 'Add new', { action: 'new', controller: "application"}, class: 'py-2 px-4 bg-blue-500 text-white mr-2' %>
 
-<%= link_to('Hide done', { action: 'hide', controller: "application"}, class: 'py-2 px-4 bg-blue-500 text-white') %>
+<%= link_to 'Hide done', { action: 'hide', controller: "application"}, class: 'py-2 px-4 bg-blue-500 text-white mr-2' %>
+
+<%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: 'inline py-2 px-4 bg-blue-500 text-white' %>
+</nav>
 
 <ul class="mt-4">
   <% @todos.each do |todo| %>
@@ -10,6 +14,9 @@
       <div class="mr-4 w-80">
         <%= check_box_tag(todo.id, todo.id, todo.done, :onclick => "changeState(event)") %>
         <%= todo.title %>
+        <% if todo.due_date %>
+        <%= todo.due_date.strftime('%d/%m/%Y %H:%M') %>
+        <% end %>
       </div>
       <%= button_to "Delete", {controller: "application", action: "delete", id: todo.id}, method: :delete, form: { data: { turbo_confirm: "Are you sure"}}, class: 'py-2 px-4 bg-red-500 text-white inline' %>
     </li>
