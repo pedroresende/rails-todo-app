@@ -29,10 +29,10 @@ class ApplicationController < ActionController::Base
 
   def create
     puts YAML::dump(current_user[:id])
-    @user = User.find_by(id: current_user[:id])
-    @todo = user.todos.create(todo_params)
+    user = User.find_by(id: current_user[:id])
+    todo = user.todos.create(todo_params)
 
-    if @todo.save
+    if todo.save
       redirect_to root_path
     else
       render :new, status: :unprocessable_entity
