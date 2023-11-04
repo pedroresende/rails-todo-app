@@ -1,0 +1,11 @@
+
+<h1>New Todo Create, <%= @user.email %></h1>
+<p>
+  You have have created a new todo "<%= @todo.title %>"
+</p>
+<% if @todo.due_date %>
+  <p>
+    with the due_date <%= @todo.due_date %>
+  </p>
+<% end %>
+<p>Thanks for joining and have a great day!</p>

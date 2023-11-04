@@ -2,10 +2,10 @@ const defaultTheme = require("tailwindcss/defaultTheme")
 
 module.exports = {
   content: [
-    "./public/*.html",
-    "./app/helpers/**/*.rb",
-    "./app/javascript/**/*.js",
-    "./app/views/**/*"
+    './public/*.html',
+    './app/helpers/**/*.rb',
+    './app/javascript/**/*.js',
+    './app/views/**/*.{erb,haml,html,slim}'
   ],
   theme: {
     extend: {
@@ -21,3 +21,4 @@ module.exports = {
     require("@tailwindcss/container-queries")
   ]
 }
+
