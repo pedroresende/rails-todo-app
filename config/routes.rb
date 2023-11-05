@@ -7,6 +7,10 @@ Rails.application.routes.draw do
 
   get "/hide" => "todos#hide"
 
+  post "/check/:id" => "todos#check"
+
+  post "/uncheck/:id" => "todos#uncheck"
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
