@@ -1,19 +1,27 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  root "application#index"
 
-  post "/check/:id" => "application#check"
+  root "todos#index"
 
-  post "/uncheck/:id" => "application#uncheck"
+  resources :todos
 
-  get "/new" => "application#new"
+  get "/hide" => "todos#hide"
+  # post "/check/:id" => "application#check"
 
-  get "/hide" => "application#hide"
+  # post "/uncheck/:id" => "application#uncheck"
 
-  post "/new" => "application#create"
+  # get "/new" => "application#new"
 
-  delete "/:id" => "application#delete"
+  # get "/hide" => "application#hide"
+
+  # post "/new" => "application#create"
+
+  # get "/:id/edit",  to: "application#edit", as: "edit_todo"
+  
+  # put "/:id",  to: "application#update", as: "update_todo"
+
+  # delete "/:id" => "application#delete"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

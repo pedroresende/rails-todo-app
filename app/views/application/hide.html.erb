@@ -1,18 +1,27 @@
-<h1 class="text-3xl block mb-4">Welcome to the Ruby on Rails todo app</h1>
 
+
+<%= render "partial/dashboard", layout: 'box', user: @user do %>
 <nav class="flex">
-<%= link_to 'Add new', { action: 'new', controller: "application"}, class: 'py-2 px-4 bg-blue-500 text-white mr-2 rounded-md cursor-pointer' %>
+  <%= link_to 'Add new', { action: 'new', controller: "todos"}, class: 'py-2 px-4 bg-blue-500 text-white mr-2 rounded-md cursor-pointer' %>
+  
+  <%= link_to'Show all', { action: 'index', controller: "todos"}, class: 'py-2 px-4 bg-blue-500 text-white rounded-md cursor-pointer' %>
+  </nav>
 
-<%= link_to'Show all', { action: 'index', controller: "application"}, class: 'py-2 px-4 bg-blue-500 text-white rounded-md cursor-pointer' %>
-</nav>
-
-<ul class="mt-4">
+<ul role="list" class="divide-y divide-gray-100 mt-4">
   <% @todos.each do |todo| %>
-    <li class="my-2">
-      <%= todo.title %> - 
-      <%= todo.updated_at %> - 
+  <li class="flex justify-between gap-x-6 py-5">
+    <div class="flex min-w-0 gap-x-4">
       <%= check_box_tag(todo.id, todo.id, todo.done, :onclick => "changeState(event)") %>
-    </li>
+      <%= todo.title %>
+      <% if todo.due_date %>
+      <%= todo.due_date.strftime('%d/%m/%Y %H:%M') %>
+      <% end %>
+    </div>
+    <div class="grow-1 flex">
+      <%= link_to "Edit", {controller: "todos", action: "edit", id: todo.id}, class: 'py-2 px-4 bg-blue-500 text-white inline rounded-md cursor-pointer mr-2' %>
+      <%= button_to "Delete", {controller: "todos", action: "destroy", id: todo.id}, method: :delete, form: { data: { turbo_confirm: "Are you sure"}}, class: 'py-2 px-4 bg-red-500 text-white inline rounded-md cursor-pointer' %>
+    </div>
+  </li>
   <% end %>
 </ul>
 
@@ -35,3 +44,4 @@
     )
   }
 </script>
+<% end %>
