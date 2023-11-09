@@ -8,16 +8,16 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
     ports:
       - "${DB_PORT}:5432"
-  web:
-    build: .
-    command: bash -c "bundle install && bundle exec puma"
-    volumes:
-      - .:/myapp
-      - bundle_cache:/usr/local/bundle
-    ports:
-      - "${WEB_PORT}:3000"
-    depends_on:
-      - db
+  # web:
+  #   build: .
+  #   command: bash -c "bundle install && bundle exec puma"
+  #   volumes:
+  #     - .:/myapp
+  #     - bundle_cache:/usr/local/bundle
+  #   ports:
+  #     - "${WEB_PORT}:3000"
+  #   depends_on:
+  #     - db
 
 volumes:
   bundle_cache:

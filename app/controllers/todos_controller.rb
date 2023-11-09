@@ -3,26 +3,26 @@ class TodosController < ApplicationController
 
   def index
     @user = User.find_by(id: current_user[:id])
-    @todos = Todo.order("id ASC").all
+    @todos = @user.todos.order("title ASC").all
   end
 
   def hide
     @user = User.find_by(id: current_user[:id])
-    @todos = Todo.order("id ASC").where(done: false).all
+    @todos = Todo.order('id ASC').where(done: false).all
   end
 
   def check
     @todo = Todo.find_by(id: params[:id])
-    if @todo.update(done: true, due_date: DateTime.current)
-      head :ok, status: 200
-    end
+    return unless @todo.update(done: true, due_date: DateTime.current)
+
+    head :ok, status: 200
   end
 
   def uncheck
     @todo = Todo.find_by(id: params[:id])
-    if @todo.update(done: false)
-      head(:ok)
-    end
+    return unless @todo.update(done: false)
+
+    head(:ok)
   end
 
   def new
@@ -58,8 +58,7 @@ class TodosController < ApplicationController
     end
   end
 
-
-  def delete
+  def destroy
     @todo = Todo.find(params[:id])
     @todo.destroy
 
@@ -70,5 +69,4 @@ class TodosController < ApplicationController
   def todo_params
     params.require(:todo).permit(:title, :done, :due_date, :note, :remind_me)
   end
-
 end

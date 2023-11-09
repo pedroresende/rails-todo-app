@@ -1,0 +1,42 @@
+<%= render "partial/dashboard", layout: 'box', user: @user do %>
+  <nav class="flex">
+    <%= link_to 'Add Todo List', { action: 'new', controller: "todo_lists"}, class: 'py-2 px-4 bg-blue-500 text-white mr-2 rounded-md cursor-pointer' %>
+  </nav>
+
+  <ul role="list" class="divide-y divide-gray-100 mt-4">
+    <% @todo_lists.each do |todo_list| %>
+      <li class="flex justify-between gap-x-6 py-5 cursor-pointer">
+        <div class="flex min-w-0 gap-x-4">
+          <%= link_to todo_list.title, {controller: 'todo_lists', action: "show", id: todo_list.id}, class: 'hover:underline cursor-pointer' %>
+        </div>
+        <div class="grow-1 flex">
+          <%= link_to "Edit", {controller: "todo_lists", action: "edit", id: todo_list.id}, class: 'py-2 px-4 bg-blue-500 text-white inline rounded-md cursor-pointer mr-2' %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+
+  <%# <script>
+    changeState = (id) => {
+      const parentElement = document.getElementById(id)
+
+      if (parentElement.checked) {
+        parentElement.checked = false
+      } else {
+        parentElement.checked = true
+      }
+
+      const path = parentElement.checked ? `/check/${id}.json` : `/uncheck/${id}.json`
+
+      fetch(path,
+        { 
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content,
+          },
+        }
+      )
+    }
+  </script> %>
+<% end %>
