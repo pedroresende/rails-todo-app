@@ -13,7 +13,7 @@ class TodoListsController < ApplicationController
   def new
     @user = User.find_by(id: current_user[:id])
     @users = User.all
-    @todo = TodoList.new
+    @todo_list = TodoList.new
   end
 
   def edit
@@ -23,9 +23,14 @@ class TodoListsController < ApplicationController
 
   def create
     @user = User.find_by(id: current_user[:id])
-    puts params[:title]
-    puts params[:todo_list[:user_id]]
-    # @todo_list = @user.todo_lists.create(todos_list)
+    puts todos_list
+    @todo_list = @user.todo_lists.create(todos_list)
+
+    if @todo_list.user_id
+      @new_user = User.find(todos_list[:user_id])
+      @todo_list.users << @new_user
+    end
+
     if @todo_list.save
       # TodoMailer.with(user: @user, todo: @todo).new_todo.deliver_later
       redirect_to root_path
