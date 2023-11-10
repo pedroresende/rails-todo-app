@@ -1,4 +1,4 @@
-<%= render "partial/dashboard" , layout: 'box' , user: @user do %>
+<%= render "partial/dashboard" , layout: 'box', user: @user, title: 'New Todo List' do %>
   <%= form_with url: "/todo_lists", method: :post, model: @todo_list do |form| %>
     <div class="mb-4">
       <%= form.label :title, class:"block text-gray-600" %><br>

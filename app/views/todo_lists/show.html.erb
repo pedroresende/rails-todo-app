@@ -1,8 +1,8 @@
-<%= render "partial/dashboard", layout: 'box', user: @user do %>
-  <nav class="flex">
-  <%= link_to 'Add new', { action: 'new', controller: "todos"}, class: 'py-2 px-4 bg-blue-500 text-white mr-2 rounded-md cursor-pointer' %>
+<%= render "partial/dashboard", layout: 'box', user: @user, title: @todo_list.title do %>
+  <nav class="flex content-center">
+  <%= link_to image_tag("plus.svg", class: 'w-4 h-4'), { action: 'new', controller: "todos", todo_list_id: @todo_list.id}, class: 'py-2 px-4 bg-white border text-white mr-2 rounded-md cursor-pointer' %>
 
-  <%= link_to 'Hide done', { action: 'hide', controller: "todos"}, class: 'py-2 px-4 bg-blue-500 text-white mr-2 rounded-md cursor-pointer' %>
+  <%= link_to 'Hide done', { action: 'hide', controller: "todos"}, class: 'py-2 px-4 bg-blue-500 text-white mr-2 rounded-md cursor-pointer hover:bg-white hover:text-black hover:border' %>
   </nav>
 
   <ul role="list" class="divide-y divide-gray-100 mt-4">
@@ -13,8 +13,8 @@
           <%= todo.title %>
         </div>
         <div class="grow-1 flex">
-          <%= link_to "Edit", {controller: "todos", action: "edit", id: todo.id}, class: 'py-2 px-4 bg-blue-500 text-white inline rounded-md cursor-pointer mr-2' %>
-          <%= button_to "Delete", {controller: "todos", action: "destroy", id: todo.id}, method: :delete, form: { data: { turbo_confirm: "Are you sure"}}, class: 'py-2 px-4 bg-red-500 text-white inline rounded-md cursor-pointer' %>
+          <%# <%= link_to "Edit", {controller: "todos", action: "edit", id: todo.id}, class: 'py-2 px-4 bg-blue-500 text-white inline rounded-md cursor-pointer mr-2' %> %>
+          <%# <%= button_to "Delete", {controller: "todos", action: "destroy", id: todo.id}, method: :delete, form: { data: { turbo_confirm: "Are you sure"}}, class: 'py-2 px-4 bg-red-500 text-white inline rounded-md cursor-pointer' %> %>
         </div>
       </li>
     <% end %>

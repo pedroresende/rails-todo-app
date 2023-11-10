@@ -1,17 +1,15 @@
-<%= render "partial/dashboard", layout: 'box', user: @user do %>
+<%= render "partial/dashboard", layout: 'box', user: @user, title: 'Todo Lists' do %>
   <nav class="flex">
-    <%= link_to 'Add Todo List', { action: 'new', controller: "todo_lists"}, class: 'py-2 px-4 bg-blue-500 text-white mr-2 rounded-md cursor-pointer' %>
+    <%= link_to image_tag("add-folder.svg", border: 0), { action: 'new', controller: "todo_lists"}, class: 'py-2 px-4 bg-white border text-white mr-2 rounded-md cursor-pointer' %>
   </nav>
 
   <ul role="list" class="divide-y divide-gray-100 mt-4">
     <% @todo_lists.each do |todo_list| %>
-      <li class="flex justify-between gap-x-6 py-5 cursor-pointer">
-        <div class="flex min-w-0 gap-x-4">
-          <%= link_to todo_list.title, {controller: 'todo_lists', action: "show", id: todo_list.id}, class: 'hover:underline cursor-pointer' %>
+      <li class="flex gap-x-6 py-5 cursor-pointer mx-2">
+        <div class="flex gap-x-4 items-center w-full" onclick="window.location.href = '/todo_lists/24'">
+          <%= image_tag "folder.svg", class: "h-4 w-4" %> <%= link_to todo_list.title, {controller: 'todo_lists', action: "show", id: todo_list.id}, class: 'hover:underline cursor-pointer' %>
         </div>
-        <div class="grow-1 flex">
-          <%= link_to "Edit", {controller: "todo_lists", action: "edit", id: todo_list.id}, class: 'py-2 px-4 bg-blue-500 text-white inline rounded-md cursor-pointer mr-2' %>
-        </div>
+        <%= link_to "Edit", {controller: "todo_lists", action: "edit", id: todo_list.id}, class: 'py-2 px-4 bg-blue-500 text-white inline rounded-md cursor-pointer mr-2' %>
       </li>
     <% end %>
   </ul>

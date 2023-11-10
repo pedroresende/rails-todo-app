@@ -32,7 +32,8 @@ class TodosController < ApplicationController
 
   def create
     @user = User.find_by(id: current_user[:id])
-    @todo = @user.todos.create(todo_params)
+    @todo_list = @user.todo_lists.find_by(id: params[:todo_list_id])
+    @todo = @todo_list.todos.create(todo_params)
 
     if @todo.save
       TodoMailer.with(user: @user, todo: @todo).new_todo.deliver_later

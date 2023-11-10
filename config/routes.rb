@@ -3,9 +3,9 @@ Rails.application.routes.draw do
 
   root "todo_lists#index"
 
-  resources :todo_lists
-
-  resources :todos
+  resources :todo_lists do
+    resources :todos
+  end
 
   get "/hide" => "todos#hide"
 

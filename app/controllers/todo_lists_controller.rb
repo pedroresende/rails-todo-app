@@ -7,7 +7,12 @@ class TodoListsController < ApplicationController
 
   def show
     @user = User.find_by(id: current_user[:id])
-    @todos = @user.todo_lists.find(params[:id]).todos.all
+    @todo_list = @user.todo_lists.find(params[:id])
+    @todos = @todo_list.todos.all
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @todo_list }
+    end
   end
 
   def new
@@ -21,17 +26,27 @@ class TodoListsController < ApplicationController
     @todo_list = TodoList.find(params[:id])
   end
 
+  def update
+    @user = User.find_by(id: current_user[:id])
+    @todo_list = TodoList.find(params[:id])
+
+    if @todo_list.update(todos_list)
+      redirect_to root_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def create
     @user = User.find_by(id: current_user[:id])
-    puts todos_list
     @todo_list = @user.todo_lists.create(todos_list)
 
-    if @todo_list.user_id
+    if todos_list[:user_id] != ""
       @new_user = User.find(todos_list[:user_id])
       @todo_list.users << @new_user
     end
 
-    if @todo_list.save
+    if @todo_list.save != nil
       # TodoMailer.with(user: @user, todo: @todo).new_todo.deliver_later
       redirect_to root_path
     else
