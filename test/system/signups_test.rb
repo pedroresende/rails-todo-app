@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class SignupsTest < ApplicationSystemTestCase
   test "visiting the index" do
-    visit todos_path
+    visit "/"
 
     click_on "Sign up"
   
@@ -16,7 +16,7 @@ class SignupsTest < ApplicationSystemTestCase
   end
 
   test "register a new user" do
-    visit todos_path
+    visit "/"
 
     click_on "Sign up"
   
