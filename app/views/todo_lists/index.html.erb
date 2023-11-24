@@ -6,35 +6,11 @@
   <ul role="list" class="divide-y divide-gray-100 mt-4">
     <% @todo_lists.each do |todo_list| %>
       <li class="flex gap-x-6 py-5 cursor-pointer mx-2">
-        <div class="flex gap-x-4 items-center w-full" onclick="window.location.href = '/todo_lists/24'">
+        <div class="flex gap-x-4 items-center w-full">
           <%= image_tag "folder.svg", class: "h-4 w-4" %> <%= link_to todo_list.title, {controller: 'todo_lists', action: "show", id: todo_list.id}, class: 'hover:underline cursor-pointer' %>
         </div>
         <%= link_to "Edit", {controller: "todo_lists", action: "edit", id: todo_list.id}, class: 'py-2 px-4 bg-blue-500 text-white inline rounded-md cursor-pointer mr-2' %>
       </li>
     <% end %>
   </ul>
-
-  <%# <script>
-    changeState = (id) => {
-      const parentElement = document.getElementById(id)
-
-      if (parentElement.checked) {
-        parentElement.checked = false
-      } else {
-        parentElement.checked = true
-      }
-
-      const path = parentElement.checked ? `/check/${id}.json` : `/uncheck/${id}.json`
-
-      fetch(path,
-        { 
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content,
-          },
-        }
-      )
-    }
-  </script> %>
 <% end %>

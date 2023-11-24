@@ -28,16 +28,16 @@ class TodosController < ApplicationController
   def new
     @user = User.find_by(id: current_user[:id])
     @todo = Todo.new
+    @todo_list_id = params[:todo_list_id]
   end
 
   def create
     @user = User.find_by(id: current_user[:id])
-    @todo_list = @user.todo_lists.find_by(id: params[:todo_list_id])
-    @todo = @todo_list.todos.create(todo_params)
+    @todo = @user.todo_lists.find_by(id: params[:todo_list_id]).todos.create(todo_params)
 
     if @todo.save
       TodoMailer.with(user: @user, todo: @todo).new_todo.deliver_later
-      redirect_to root_path
+      redirect_to "/todo_lists/#{params[:todo_list_id]}"
     else
       render :new, status: :unprocessable_entity
     end
@@ -46,6 +46,7 @@ class TodosController < ApplicationController
   def edit
     @user = User.find_by(id: current_user[:id])
     @todo = Todo.find(params[:id])
+    @todo_lists_id = params[:todo_list_id]
   end
 
   def update
@@ -53,7 +54,7 @@ class TodosController < ApplicationController
     @todo = Todo.find(params[:id])
 
     if @todo.update(todo_params)
-      redirect_to root_path
+      redirect_to "/todo_lists/#{params[:todo_list_id]}"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -63,7 +64,7 @@ class TodosController < ApplicationController
     @todo = Todo.find(params[:id])
     @todo.destroy
 
-    redirect_to root_path, status: :see_other
+    redirect_to "/todo_lists/#{params[:todo_list_id]}"
   end
 
   private

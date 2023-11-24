@@ -10,7 +10,7 @@ class TodoListsController < ApplicationController
     @todo_list = @user.todo_lists.find(params[:id])
     @todos = @todo_list.todos.all
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.json { render json: @todo_list }
     end
   end

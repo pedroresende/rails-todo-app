@@ -8,9 +8,8 @@
     with the due_date <%= @todo.due_date %>
   </p>
 <% end %>
-<% if @todo.note %>
+<% if !@todo.note %>
   <p>
     with the note <%= @todo.note %>
   </p>
 <% end %>
-<p>Thanks for joining and have a great day!</p>
