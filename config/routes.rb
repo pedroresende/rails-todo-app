@@ -7,7 +7,9 @@ Rails.application.routes.draw do
     resources :todos
   end
 
-  get "/hide" => "todos#hide"
+  get "/todo_lists/:id/hide" => "todos#hide"
+
+  get "/todo_lists/:id/show" => "todos#show"
 
   post "/check/:id" => "todos#check"
 
