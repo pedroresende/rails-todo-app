@@ -6,5 +6,6 @@
 #
 one: {
   email: 'hi@hi.com',
-  encrypted_password: '$2a$12$QqMHIJvyE1E0ZoCBUTcvRu/8MqA.uLy8virkYaRATdbbZB3AVMWiu'
+  encrypted_password: '$2a$12$QqMHIJvyE1E0ZoCBUTcvRu/8MqA.uLy8virkYaRATdbbZB3AVMWiu',
+  confirmed_at: '2023-11-26 18:15:54.433'
 }
