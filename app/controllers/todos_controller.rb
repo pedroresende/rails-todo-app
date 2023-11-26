@@ -8,6 +8,7 @@ class TodosController < ApplicationController
 
   def hide
     @user = User.find_by(id: current_user[:id])
+    @todo_list = @user.todo_lists.find_by(id: params[:id])
     @todos = Todo.order('id ASC').where(done: false).all
   end
 

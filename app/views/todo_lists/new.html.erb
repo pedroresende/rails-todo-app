@@ -1,25 +1,3 @@
 <%= render "partial/dashboard" , layout: 'box', user: @user, title: 'New Todo List' do %>
-  <%= form_with url: "/todo_lists", method: :post, model: @todo_list do |form| %>
-    <div class="mb-4">
-      <%= form.label :title, class:"block text-gray-600" %><br>
-      <%= form.text_field :title, class: "w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" %>
-
-      <% @todo_list.errors.full_messages_for(:title).each do |message| %>
-        <div class="mt-4 bg-red-500 text-white p-4 rounded-md w-52">
-          <%= message %>
-        </div>
-      <% end %>
-    </div>
-
-    <div class="mb-4">
-      <%= form.label 'Share todo list with' , class:"block text-gray-600" %><br>
-      <%= select("todo_list", :user_id, @users.collect {|user| [ user.email, user.id ] }, { prompt: "Select Person" }) %>
-    </div>
-
-    <div class="mt-2 flex">
-      <%= link_to 'Back' , { action: 'index' , controller: "todo_lists" }, class: 'py-2 px-4 bg-blue-500 text-white mr-4 rounded-md cursor-pointer' %>
-
-      <%= form.submit "Create" , class: 'py-2 px-4 bg-blue-500 text-white cursor-pointer rounded-md cursor-pointer' %>
-    </div>
-  <% end %>
+  <%= render "partial/todo_lists_create_update", todo_list: @todo_list %>
 <% end %>

@@ -1,59 +1,7 @@
 <%= render "partial/dashboard" , layout: 'box' , user: @user, title: 'New Todo' do %>
-  <%= form_with url: "/todo_lists/#{@todo_list_id}/todos", method: :post, model: @todo do |form| %>
-    <div class="mb-4">
-      <%= form.label :title, class:"block text-gray-600" %><br>
-      <%= form.text_field :title, class: "w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" %>
 
-      <% @todo.errors.full_messages_for(:title).each do |message| %>
-        <div class="mt-4 bg-red-500 text-white p-4 rounded-md w-52">
-          <%= message %>
-        </div>
-      <% end %>
-    </div>
-
-    <div class="mb-4">
-      <%= form.label :done, class:"block text-gray-600" %><br>
-      <%= form.check_box :done %>
-
-      <% @todo.errors.full_messages_for(:done).each do |message| %>
-        <div class="mt-4 bg-red-500 text-white p-4 rounded-md w-52">
-          <%= message %>
-        </div>
-      <% end %>
-    </div>
-
-    <div class="mb-4">
-      <%= form.label :due_date, class:"block text-gray-600" %><br>
-      <%= form.datetime_field :due_date, class: "w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" %>
-
-      <% @todo.errors.full_messages_for(:due_date).each do |message| %>
-        <div class="mt-4 bg-red-500 text-white p-4 rounded-md w-52">
-          <%= message %>
-        </div>
-      <% end %>
-    </div>
-
-    <div class="mb-4">
-      <%= form.label :remind_me, class:"block text-gray-600" %><br>
-      <%= form.datetime_field :remind_me, class: "w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" %>
-
-      <% @todo.errors.full_messages_for(:remind_me).each do |message| %>
-        <div class="mt-4 bg-red-500 text-white p-4 rounded-md w-52">
-          <%= message %>
-        </div>
-      <% end %>
-    </div>
-
-    <div class="mb-4">
-      <%= form.label :note, class:"block text-gray-600" %><br>
-      <%= form.rich_text_area :note %>
-
-      <% @todo.errors.full_messages_for(:note).each do |message| %>
-        <div class="mt-4 bg-red-500 text-white p-4 rounded-md w-52">
-          <%= message %>
-        </div>
-      <% end %>
-    </div>
+  <%= form_with  model: @todo, url: "/todo_lists/#{@todo_list_id}/todos", method: :post do |form| %>
+    <%= render "partial/todo_create_update_form", todo: @todo, form: form %>
 
     <div class="mt-2 flex">
       <%= link_to 'Back' , { action: 'index' , controller: "todos" }, class: 'py-2 px-4 bg-blue-500 text-white mr-4 rounded-md cursor-pointer' %>

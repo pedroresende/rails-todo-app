@@ -17,18 +17,24 @@ class TodoListsController < ApplicationController
 
   def new
     @user = User.find_by(id: current_user[:id])
-    @users = User.all
+    @users = User.where.not(id: current_user[:id])
     @todo_list = TodoList.new
   end
 
   def edit
     @user = User.find_by(id: current_user[:id])
+    @users = User.where.not(id: current_user[:id])
     @todo_list = TodoList.find(params[:id])
   end
 
   def update
     @user = User.find_by(id: current_user[:id])
     @todo_list = TodoList.find(params[:id])
+
+    if todos_list[:user_id] != ""
+      @new_user = User.find(todos_list[:user_id])
+      @todo_list.users << @new_user
+    end
 
     if @todo_list.update(todos_list)
       redirect_to root_path
@@ -47,7 +53,7 @@ class TodoListsController < ApplicationController
     end
 
     if @todo_list.save != nil
-      # TodoMailer.with(user: @user, todo: @todo).new_todo.deliver_later
+      TodoMailer.with(user: @user, todo: @todo).new_todo.deliver_later
       redirect_to root_path
     else
       render :new, status: :unprocessable_entity
