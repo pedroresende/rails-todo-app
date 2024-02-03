@@ -3,7 +3,7 @@ class TodosController < ApplicationController
 
   def index
     @user = User.find_by(id: current_user[:id])
-    @todos = @user.todos.order("title ASC").all
+    @todos = @user.todos.order('title ASC').all
   end
 
   def hide
@@ -69,6 +69,7 @@ class TodosController < ApplicationController
   end
 
   private
+
   def todo_params
     params.require(:todo).permit(:title, :done, :due_date, :note, :remind_me)
   end
