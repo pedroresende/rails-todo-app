@@ -19,9 +19,9 @@ class TodosTest < ApplicationSystemTestCase
 
     click_on "Create"
 
-    assert text: "New Todo List"
+    assert text: "Default todo list"
 
-    click_on "New Todo List"
+    click_on "Default todo list"
 
     visit "/todo_lists/1/todos/new"
 
@@ -29,7 +29,7 @@ class TodosTest < ApplicationSystemTestCase
 
     click_on "Back"
 
-    assert text: "New Todo List"
+    assert text: "Default todo list"
 
     visit "/todo_lists/1/todos/new"
 

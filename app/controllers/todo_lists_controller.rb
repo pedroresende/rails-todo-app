@@ -42,11 +42,12 @@ class TodoListsController < ApplicationController
 
   def create
     @user = User.find_by(id: current_user[:id])
+    @users = User.where.not(id: current_user[:id])
     @todo_list = @user.todo_lists.create(todos_list)
 
     add_user_to_list(params, :user_id)
 
-    if @todo_list.save.nil?
+    if @todo_list.save
       TodoMailer.with(user: @user, todo: @todo).new_todo.deliver_later
       redirect_to root_path
     else
