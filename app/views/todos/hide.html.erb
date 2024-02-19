@@ -1,7 +1,7 @@
 <%= render "partial/dashboard", layout: 'box', user: @user, title: @todo_list.title do %>
   <nav class="flex">
-    <%= link_to image_tag("plus.svg", class: 'w-4 h-4'), { action: 'new', controller: "todos", todo_list_id: @todo_list.id}, class: 'py-2 px-4 bg-white border text-white mr-2 rounded-md cursor-pointer' %>
-    
+    <%= link_to image_tag("plus.svg", class: 'w-4 h-4'), { action: 'new', controller: "todos", todo_list_id: @todo_list.id}, class: 'py-2 px-4 bg-white border text-white mr-2 rounded-md cursor-pointer pt-[11px]' %>
+
     <%= link_to 'Show all', { action: 'show', controller: "todo_lists"}, class: 'py-2 px-4 bg-blue-500 text-white mr-2 rounded-md cursor-pointer hover:bg-white hover:text-black hover:border' %>
   </nav>
 

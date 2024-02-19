@@ -26,7 +26,7 @@
     <% end %>
 
 
-<% end %>    
+<% end %>
   <% if todo_list.id %>
     <%= button_to "Delete", {controller: "todo_lists", action: "destroy", id: @todo_list.id}, method: :delete, form: { data: { turbo_confirm: "Are you sure"}}, class: 'ml-4 py-2 px-4 bg-red-500 text-white inline rounded-md cursor-pointer' %>
   <% end %>
