@@ -14,16 +14,16 @@ class TodosController < ApplicationController
 
   def check
     @todo = Todo.find_by(id: params[:id])
-    return unless @todo.update(done: true, due_date: DateTime.current)
+    @todo.update(done: true, due_date: DateTime.current)
 
-    head :ok, status: 200
+    head :no_content
   end
 
   def uncheck
     @todo = Todo.find_by(id: params[:id])
-    return unless @todo.update(done: false)
+    @todo.update(done: false)
 
-    head(:ok)
+    head :no_content
   end
 
   def new
