@@ -26,8 +26,8 @@ That’s it. Your app should now be running on port 3000 on your Docker daemon
 
 ## Deploy
 
-````
+```
 bundle exec rake assets:precompile
 RAILS_ENV=production bundle exec puma
 ```
-````
+
